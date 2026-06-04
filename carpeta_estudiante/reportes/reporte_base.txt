@@ -1,0 +1,4 @@
+Reporte base de referencia
+==========================
+Este archivo sirve para comparar como luce un reporte plano.
+El estudiante debe generar un reporte nuevo desde la aplicacion.

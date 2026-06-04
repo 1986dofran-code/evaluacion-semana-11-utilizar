@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroData Integridad Pro - Semana 11</title>
+
+  <!-- Libreria 1: Font Awesome. Si no esta en vendor/, los iconos no cargaran. -->
+  <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="eyebrow"><i class="fa-solid fa-folder-tree"></i> Semana 11 · Unidad 2</p>
+      <h1>AgroData Integridad Pro</h1>
+      <p>
+        Sistema web educativo para manejar archivos CSV/JSON, revisar integridad de datos,
+        organizar informacion y generar reportes tecnicos desde VS Code.
+      </p>
+      <div class="hero__actions">
+        <button id="btnCargarDatos" class="btn btn-primary"><i class="fa-solid fa-database"></i> Cargar datos base</button>
+        <button id="btnAnalizar" class="btn btn-secondary"><i class="fa-solid fa-shield-halved"></i> Analizar integridad</button>
+        <button id="btnExportarTxt" class="btn btn-outline"><i class="fa-solid fa-file-lines"></i> Exportar TXT</button>
+        <button id="btnExportarPdf" class="btn btn-outline"><i class="fa-solid fa-file-pdf"></i> Exportar PDF</button>
+      </div>
+    </div>
+    <aside class="status-card" id="estadoLibrerias">
+      <h2><i class="fa-solid fa-plug-circle-check"></i> Estado de librerias</h2>
+      <p>Verificando dependencias locales...</p>
+    </aside>
+  </header>
+
+  <main class="app-shell">
+    <section class="panel objective-panel">
+      <div>
+        <p class="section-label">Objetivo funcional</p>
+        <h2>Validar datos antes de usarlos para tomar decisiones</h2>
+        <p>
+          La aplicacion debe leer archivos simples, detectar errores, mostrar resultados claros
+          y generar evidencias sobre la integridad de la informacion.
+        </p>
+      </div>
+      <ul class="objective-list">
+        <li><i class="fa-solid fa-check"></i> Leer produccion desde CSV.</li>
+        <li><i class="fa-solid fa-check"></i> Leer inventario desde JSON.</li>
+        <li><i class="fa-solid fa-check"></i> Detectar campos vacios, negativos, duplicados e incoherencias.</li>
+        <li><i class="fa-solid fa-check"></i> Generar reporte descargable.</li>
+      </ul>
+    </section>
+
+    <section class="kpi-grid" id="panelKpis">
+      <article class="kpi-card"><span>Total registros</span><strong id="kpiTotal">0</strong></article>
+      <article class="kpi-card success"><span>Validos</span><strong id="kpiValidos">0</strong></article>
+      <article class="kpi-card warning"><span>Advertencias</span><strong id="kpiAdvertencias">0</strong></article>
+      <article class="kpi-card danger"><span>Errores</span><strong id="kpiErrores">0</strong></article>
+      <article class="kpi-card info"><span>Integridad</span><strong id="kpiIntegridad">0%</strong></article>
+    </section>
+
+    <section class="grid-two">
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="section-label">Visualizacion</p>
+            <h2>Distribucion de calidad de datos</h2>
+          </div>
+        </div>
+        <canvas id="graficoIntegridad" height="230"></canvas>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="section-label">Carga manual</p>
+            <h2>Probar otros archivos</h2>
+          </div>
+        </div>
+        <label class="file-box">
+          <span><i class="fa-solid fa-file-csv"></i> Cargar CSV</span>
+          <input type="file" id="inputCsv" accept=".csv" />
+        </label>
+        <label class="file-box">
+          <span><i class="fa-solid fa-file-code"></i> Cargar JSON</span>
+          <input type="file" id="inputJson" accept=".json" />
+        </label>
+        <p class="hint">Usa estos controles para probar archivos propios o versiones corregidas.</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <p class="section-label">Datos CSV</p>
+          <h2>Produccion rural analizada</h2>
+        </div>
+        <span class="tag">data/produccion_base.csv</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Fecha</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Unidad</th>
+              <th>Responsable</th>
+              <th>Estado</th>
+              <th>Observaciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaProduccion">
+            <tr><td colspan="8" class="empty">Carga los datos base para iniciar.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <p class="section-label">Datos JSON</p>
+          <h2>Inventario revisado</h2>
+        </div>
+        <span class="tag">data/inventario_base.json</span>
+      </div>
+      <div id="listaInventario" class="inventory-list">
+        <p class="empty">Aun no se ha cargado el inventario.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <p class="section-label">Reporte tecnico</p>
+          <h2>Hallazgos de integridad</h2>
+        </div>
+        <span class="tag">Bitacora + capturas</span>
+      </div>
+      <pre id="reporteTexto" class="report-box">El reporte aparecera despues de analizar la integridad.</pre>
+    </section>
+  </main>
+
+  <!-- Librerias externas locales. Deben prepararse con npm install + npm run setup:libs -->
+  <script src="vendor/papaparse.min.js"></script>
+  <script src="vendor/chart.umd.js"></script>
+  <script src="vendor/sweetalert2.all.min.js"></script>
+  <script src="vendor/jspdf.umd.min.js"></script>
+
+  <!-- Codigo del proyecto -->
+  <script src="js/storage.js"></script>
+  <script src="js/validators.js"></script>
+  <script src="js/dataService.js"></script>
+  <script src="js/reports.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

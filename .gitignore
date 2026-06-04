@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Librerias copiadas automaticamente
+carpeta_estudiante/vendor/
+carpeta_profesor/solucion-final/vendor/
+
+# Material privado del docente si publica solo la actividad
+carpeta_profesor/
+
+# Archivos locales
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+
+# Comprimidos
+*.zip
+*.rar
+*.7z

@@ -1,0 +1,10 @@
+fecha,producto,cantidad,unidad,responsable
+2026-05-11,leche,15,litros,Ana
+2026-05-12,maiz,30,kilos,Pedro
+2026-05-13,cafe,-5,kilos,Luisa
+2026-05-14,yuca,,kilos,Carlos
+2026-05-15,leche,abc,litros,Ana
+2026-05-15,leche,18,kilos,Ana
+2026-05-16,huevos,0,unidades,
+2026-05-16,huevos,0,unidades,
+2026-05-17,maiz,99999,kilos,Pedro

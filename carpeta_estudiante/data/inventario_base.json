@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "producto": "Concentrado",
+    "categoria": "alimento",
+    "cantidad": 12,
+    "unidad": "bultos",
+    "estado": "disponible"
+  },
+  {
+    "id": 2,
+    "producto": "Vacunas",
+    "categoria": "salud animal",
+    "cantidad": -3,
+    "unidad": "unidades",
+    "estado": "disponible"
+  },
+  {
+    "id": 3,
+    "producto": "Abono organico",
+    "categoria": "insumo agricola",
+    "cantidad": 0,
+    "unidad": "kilos",
+    "estado": "agotado"
+  },
+  {
+    "id": 4,
+    "producto": "",
+    "categoria": "herramienta",
+    "cantidad": "cinco",
+    "unidad": "unidades",
+    "estado": "revisar"
+  },
+  {
+    "id": 5,
+    "producto": "Semilla de maiz",
+    "categoria": "semilla",
+    "cantidad": 8,
+    "unidad": "bolsas",
+    "estado": "pendiente"
+  }
+]
